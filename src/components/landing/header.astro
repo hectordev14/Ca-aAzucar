@@ -1,0 +1,41 @@
+---
+import Video from "../multimedia/video.astro";
+import Button from "../elements/Button.astro";
+import Arrows from "../elements/Arrows.astro";
+
+const styles = Astro.props;
+---
+
+<header class=`${styles}w-full h-screen`>
+    <div class="w-full
+    flex
+    justify-center
+    items-center
+    
+    z-30">
+    </div>
+    <div class="w-full min-h-90 flex items-center">
+        <div class="z-0">
+            <Video />
+        </div>
+        <div
+            class="overlay w-full h-full absolute top-0 left-0 z-10 bg-black/55 mix-blend-overlay"
+        >
+        </div>
+
+        <div
+            class="z-40 flex flex-col mx-auto justify-center min-w-full h-full"
+        >
+            <p
+                class="text-3xl max-w-3xl flex-wrap text-center m-auto text-white font-bold"
+            >
+                ALMACENAMIENTO Y MANTENIMIENTO DE CONTENEDORES SECOS Y
+                REFRIGERADOS
+            </p>
+            <div class="m-auto mt-5">
+                <Button styles="rounded-sm p-2" title="Contactanos" />
+            </div>
+            <Arrows title="Explorar" />
+        </div>
+    </div>
+</header>

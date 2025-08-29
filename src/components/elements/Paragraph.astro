@@ -1,0 +1,12 @@
+---
+interface Props {
+    pstyle?: string;
+}
+const pstyle = Astro.props;
+---
+
+<p
+    class=`${pstyle} -w-lg text-black mt-2 text-sm flex flex-col flex-wrap justify-center mx-auto py-max7`
+>
+    <slot />
+</p>

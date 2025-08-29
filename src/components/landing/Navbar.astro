@@ -1,0 +1,88 @@
+---
+import A from "../elements/Alink.astro";
+import Logo from "../multimedia/logo.astro";
+
+const url = new URL(Astro.request.url);
+const myPaht = url.pathname;
+
+const maintcont = () => (myPaht === "/" ? "maincont" : "");
+
+/* ("maincont z-50 x-auto w-full min-h-fit flex justify-center items-center sticky top-0 py-1.5"); */
+---
+
+<nav
+    id="navBar"
+    class=`${maintcont()} z-50 shadow-lg x-auto w-full min-h-fit flex flex-wrap justify-center items-center gap-5 font-bold py-1.5 fixed top-0 bg-white `
+>
+    <Logo />
+    <h2 class="text-blue-800
+			font-bold
+			mr-1.5">PINEDA LEIVA Y CIA LTDA</h2>
+    <A styless="hvr-underline-from-center text-lg" texto="Inicio" link="/" />
+    <A styless="hvr-underline-from-center text-lg" texto="Servicios" link="#" />
+    <A
+        styless="hvr-underline-from-center text-lg"
+        texto="Nosotros"
+        link="/about"
+    />
+</nav>
+
+<!-- <style>
+    /* Definir animación solo dentro de este componente */
+
+    .maincont {
+        background-color: transparent;
+        color: #fff;
+        box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
+        animation: progress-grow auto linear 500ms;
+        animation-timeline: scroll(root block);
+    }
+
+    /* Esta es una animacion que funciona conforme al scroll del usuario*/
+    @keyframes progress-grow {
+        0% {
+            background-color: transparent;
+            color: #fff;
+        }
+
+        35% {
+            background-color: #ffffffcb;
+            color: #404040;
+        }
+
+        65% {
+            background-color: #fff;
+            color: #1c1c1d;
+        }
+
+        100% {
+            background-color: #fff;
+            color: #1c1c1d;
+        }
+    }
+
+    .alink {
+        color: #fff;
+        @apply animate-[progress-text_auto_linear];
+        animation-timeline: scroll(root block);
+    }
+
+    /*Esta es una animacion que funciona conforme al scroll de usuario*/
+    @keyframes progress-text {
+        0% {
+            color: #fff;
+        }
+
+        35% {
+            color: #404040;
+        }
+
+        65% {
+            color: #1c1c1d;
+        }
+
+        100% {
+            color: #1c1c1d;
+        }
+    }
+</style> -->

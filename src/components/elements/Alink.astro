@@ -1,0 +1,9 @@
+---
+const { styless } = Astro.props;
+const { texto } = Astro.props;
+const { link } = Astro.props;
+---
+
+<a href={link}>
+    <span class=`${styless} hover:text-blue-800`>{texto}</span>
+</a>

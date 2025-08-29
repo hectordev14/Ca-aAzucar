@@ -1,0 +1,25 @@
+---
+interface Props {
+  title?: string;
+  styles?: string;
+}
+const { title, styles } = Astro.props;
+---
+
+<button
+  class=`${styles} max-w-fit
+  bg-federalblue
+    hover:bg-honolulublue
+    text-white
+    focus:bg-bluegreen
+    focus:text-federalblue
+    active:bg-bluegreen
+    active:text-federalblue
+
+      p-1 min-w-2 font-bold
+    hover:cursor-pointer`
+  type=`button`
+>
+  <!-- ... -->
+  {title}
+</button>

@@ -1,0 +1,65 @@
+---
+const { title } = Astro.props;
+const { styless } = Astro.props;
+---
+
+<a href="#iservicios" class="block items-center mx-auto">
+    <div class=`arrowscontain ${styless}`>
+        <span>{title}</span>
+        <span class="arrows"> </span>
+        <span class="arrows"></span>
+        <span class="arrows"></span>
+    </div>
+</a>
+<style>
+    .arrowscontain {
+        position: absolute;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        bottom: 15px;
+        align-self: center;
+        justify-self: center;
+    }
+
+    .arrows {
+        width: 10px;
+        height: 10px;
+        border-top: 3px solid #fff;
+        border-left: 3px solid #fff;
+        transform: rotate(-135deg);
+        animation: arrows-load 2s infinite;
+    }
+
+    .arrows :nth-child(1) {
+        bottom: 25px;
+        animation-delay: -0.4s;
+    }
+
+    .arrows :nth-child(2) {
+        animation-delay: -0.2s;
+    }
+
+    .arrows :nth-child(3) {
+        top: 25px;
+        animation-delay: -0.2s;
+    }
+
+    @keyframes arrows-load {
+        0% {
+            opacity: 0;
+            transform: rotate(-135deg) translate(5px, 5px);
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            transform: rotate(-135deg) translate(-7px, -7px);
+        }
+    }
+</style>
