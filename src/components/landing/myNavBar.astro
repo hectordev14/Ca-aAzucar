@@ -1,37 +1,51 @@
 ---
-import A from "../elements/Alink.astro";
+import Span from "../elements/Alink.astro";
 import Logo from "../multimedia/logo.astro";
-import Button from "../elements/Button.astro";
+import ThemeIcon from "../ThemeIcon.astro";
+import es from "../../i18n/es";
+import en from "../../i18n/en";
+import type { Language } from "../../typeslang/language.type";
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+
+const languages = [
+    { code: "es", label: t.languageOptions.es },
+    { code: "en", label: t.languageOptions.en },
+];
 
 const url = new URL(Astro.request.url);
 const myPaht = url.pathname;
 
-const maintcont = () => (myPaht === "/" ? "maincont" : "");
+const maintcont = () => (myPaht === `/${lang}/` ? "maincont" : "");
 ---
 
 <!-- shadow-lg x-auto w-full min-h-fit flex flex-wrap justify-center items-center
 gap-5 font-bold py-1.5 fixed top-0 bg-white -->
 <nav
-    class=`${maintcont()} z-50 navbar-center  shadow-sm w-full
- font-bold fixed top-0  bg-white text-black`
+    class={`${maintcont()} z-50 navbar-center flex flex-wrap shadow-sm w-full
+ font-bold fixed top-0 bg-gray-100 text-gray-50 h-auto`}
 >
-    <div class="w-full md:flex md:items-center md:gap-2">
-        <div class="w-full items-center flex justify-evenly">
+    <div class="w-full flex flex-wrap md:flex md:items-center md:gap-2">
+        <div class="w-full flex items-center  md:justify-evenly">
             <div
                 class="navbar-start flex items-center justify-between max-md:w-full gap-3.5"
             >
                 <Logo />
-                <a class="w-full font-bold text-blue-800 no-underline" href="/">
-                    PINEDALEIVA Y CIA LTDA</a
-                >
+                <a class="w-full font-bold text-gray-700 no-underline" href="/">
+                    <Span
+                        styless="text-gray-100 text-xl"
+                        texto={t.nav.titlepage}
+                    />
+                </a>
 
                 <!-- icono para menu en modo dispositivo celular o menor a 760px -->
-                <div class="md:hidden mr-5">
+                <div class="md:hidden mr-5 flex">
                     <button
                         type="button"
-                        class="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square"
-                        data-collapse="#default-navbar-collapse"
-                        aria-controls="default-navbar-collapse"
+                        class="btn btn-outline btn-secondary btn-sm btn-square"
+                        onclick="document.getElementById('default-navbar-collapse').classList.toggle('hidden')"
                         aria-label="Toggle navigation"
                     >
                         <svg
@@ -44,44 +58,69 @@ gap-5 font-bold py-1.5 fixed top-0 bg-white -->
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"
-                            ><path stroke="none" d="M0 0h24v24H0z" fill="none"
-                            ></path><path d="M4 6l16 0"></path><path
-                                d="M4 12l16 0"></path><path d="M4 18l16 0"
-                            ></path></svg
                         >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                            ></path>
+                            <path d="M4 6l16 0"></path>
+                            <path d="M4 12l16 0"></path>
+                            <path d="M4 18l16 0"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- elementos para navegar, aqui se define el stilo y se veran igual en cualquier
-        tamaño de pantalla -->
+        <!-- elementos para navegar -->
         <div
             id="default-navbar-collapse"
-            class="md:navbar hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full"
+            class="hidden md:flex grow basis-full flex-wrap overflow-hidden transition-[height] duration-300 max-md:w-full max-md:flex-col max-md:mt-2"
         >
-            <ul class="flex justify-evenly p-0 text-base max-md:mt-2 gap-10">
+            <ul
+                class="flex md:flex-row flex-col justify-evenly p-0 text-base gap-10 w-full"
+            >
                 <li>
-                    <A
-                        styless="hvr-underline-from-center text-xl"
-                        texto="Inicio"
-                        link="/"
-                    />
+                    <a href={`/${lang}/`}>
+                        <Span
+                            styless="hvr-underline-from-center text-xl"
+                            texto={t.nav.homme}
+                        />
+                    </a>
                 </li>
                 <li>
-                    <A
-                        styless="hvr-underline-from-center text-xl"
-                        texto="Servicios"
-                        link="#"
-                    />
+                    <a href={`/${lang}/gallery`}>
+                        <Span
+                            styless="hvr-underline-from-center text-xl"
+                            texto={t.nav.gallery}
+                        />
+                    </a>
                 </li>
                 <li>
-                    <A
-                        styless="hvr-underline-from-center text-xl"
-                        texto="Nosotros"
-                        link="/about"
-                    />
+                    <a href={`/${lang}/about`}>
+                        <Span
+                            styless="hvr-underline-from-center text-xl"
+                            texto={t.nav.about}
+                        />
+                    </a>
+                </li>
+                <li>
+                    <ThemeIcon />
+                </li>
+                <li>
+                    <form id="lang-form">
+                        <label for="lang-select">{t.languageLabel}: </label>
+                        <select id="lang-select">
+                            {
+                                languages.map((langOpt) => (
+                                    <option
+                                        value={langOpt.code}
+                                        selected={langOpt.code === lang}
+                                    >
+                                        {langOpt.label}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                    </form>
                 </li>
             </ul>
         </div>

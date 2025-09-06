@@ -1,0 +1,59 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import es from "../../i18n/es";
+import en from "../../i18n/en";
+import type { Language } from "../../typeslang/language.type";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+
+<Layout>
+    <div class="max-w-4xl flex flex-col justify-center mx-auto py-7 space-y-5">
+        <main>
+            <h2 id="gallery-title" class="gallery-title">
+                {t.gallery["title.gallery"]}
+            </h2>
+            <p id="gallery-desc" class="gallery-desc">
+                {t.gallery["description.gallery"]}
+            </p>
+            <div
+                class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+            >
+                {
+                    [
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRly-lKFr_t93jK4-hWDoqSvgevTRHA3D7XPg&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDMKOh8BzEvSErxQifbB2PJw4R7mvv8i8n8Q&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYhVREKzy8wnq_cPFm4SG4xomwP-M92amevQ&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8KMc4hbVWvGS9ov6uZmurbd8NL8-ma-NOQ&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYJ_2vOJZTytl9kwh5MwuAl4PinLMy3lDN_Q&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGb_FbXBYzoC3x9rND1JrM_DL7TM8PsNErvA&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8rTyEa0AGRezxHuZCpyX0t4OT4Y3xgFV_nw&s",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAsz6HwL94TfToZnLR8AlcVxbiJbS6G88Q9w&s",
+                    ].map((src) => (
+                        <img
+                            src={src}
+                            alt="Cultivo sostenible"
+                            class="w-full h-auto rounded cursor-pointer"
+                            onclick={`document.getElementById('modal-img').src='${src}'; document.getElementById('img-modal').classList.remove('hidden')`}
+                        />
+                    ))
+                }
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div
+        id="img-modal"
+        class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+        onclick="document.getElementById('img-modal').classList.add('hidden')"
+    >
+        <img id="modal-img" src="" class="max-h-[90%] max-w-[90%] rounded" />
+    </div>
+</Layout>

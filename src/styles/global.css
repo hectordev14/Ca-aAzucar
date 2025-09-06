@@ -10,6 +10,15 @@
     --color-honolulublue: #0077B6;
 }
 
+html.dark {
+    background-color: #1c5601;
+    color: #fff;
+}
+
+.dark .nav-links a {
+    color: #fff;
+}
+
 .float {
     transition: .5s, color .10s;
     -webkit-transition: .5s, color .10s;
@@ -36,22 +45,22 @@
 @keyframes progress-grow {
     0% {
         background-color: transparent;
-        color: #fff;
+        
     }
 
     7% {
-        background-color: #ffffffcb;
-        color: #404040;
+        background-color: #808080cb;
+    
     }
 
     65% {
-        background-color: #fff;
-        color: #1c1c1d;
+        background-color: #808080cb;
+        
     }
 
     100% {
-        background-color: #fff;
-        color: #1c1c1d;
+        background-color: #808080cb;
+        
     }
 }
 

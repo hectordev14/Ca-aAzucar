@@ -2,6 +2,14 @@
 import Video from "../multimedia/video.astro";
 import Button from "../elements/Button.astro";
 import Arrows from "../elements/Arrows.astro";
+import es from "../../i18n/es";
+import en from "../../i18n/en";
+import type { Language } from "../../typeslang/language.type";
+
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
 
 const styles = Astro.props;
 ---
@@ -29,11 +37,10 @@ const styles = Astro.props;
             <p
                 class="text-3xl max-w-3xl flex-wrap text-center m-auto text-white font-bold"
             >
-                ALMACENAMIENTO Y MANTENIMIENTO DE CONTENEDORES SECOS Y
-                REFRIGERADOS
+                <span>{t.header["header.quote"]}</span>
             </p>
             <div class="m-auto mt-5">
-                <Button styles="rounded-sm p-2" title="Contactanos" />
+                <Button styles="rounded-sm p-2" title={t.header["button.contact"]} />
             </div>
             <Arrows title="Explorar" />
         </div>

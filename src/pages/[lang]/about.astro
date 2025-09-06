@@ -1,0 +1,87 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import es from "../../i18n/es";
+import en from "../../i18n/en";
+import type { Language } from "../../typeslang/language.type";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+
+<Layout>
+    <div
+        class="max-w-lg flex flex-col flex-wrap justify-center mx-auto py-7 space-y-5"
+    >
+        <main>
+            <h2 class="font-bold">{t.contactos["about.title"]}</h2>
+            <p id="about-desc">{t.contactos["about.description"]}</p>
+            <hr />
+            <section class="about-section">
+                <h3 id="about-section-title" class="font-bold my-3">
+                    {t.contactos["about.title"]}
+                </h3>
+                <p id="about-section-desc" class="about-section-desc">
+                    {t.contactos["about.description"]}
+                </p>
+                <ul class="space-y-4 list-disc list-inside my-3">
+                    <li>
+                        <strong
+                            >{
+                                t.contactos["contacts.cenicana.address"]
+                            })</strong
+                        ><br />
+                        <span>{t.contactos["contacts.cenicana.email"]}</span>
+                        <br />
+                        <span>{t.contactos["contacts.cenicana.phone"]}</span
+                        ><br />
+                        <span
+                            >${t.contactos["contacts.cenicana.address"]}</span
+                        >
+                    </li>
+                    <li>
+                        <strong>{t.contactos["contacts.fao.name"]}</strong
+                        ><br />
+                        <span>{t.contactos["contacts.fao.email"]}</span><br
+                        />
+                        <span>{t.contactos["contacts.fao.phone"]}</span><br
+                        />
+                        <span>{t.contactos["contacts.fao.address"]}</span>
+                    </li>
+                    <li>
+                        <strong
+                            >{
+                                t.contactos["contacts.sanantonio.name"]
+                            }</strong
+                        ><br />
+                        <span
+                            >{t.contactos["contacts.sanantonio.email"]}</span
+                        ><br />
+                        <span
+                            >{t.contactos["contacts.sanantonio.phone"]}</span
+                        ><br />
+                        <span
+                            >{
+                                t.contactos["contacts.sanantonio.address"]
+                            }</span
+                        >
+                    </li>
+                    <li>
+                        <strong>{t.contactos["contacts.una.name"]}</strong
+                        ><br />
+                        <span>{t.contactos["contacts.una.program"]}</span><br
+                        />
+                        <span>{t.contactos["contacts.una.email"]}</span><br
+                        />
+                        <span>{t.contactos["contacts.fao.name"]}</span><br />
+                        <span>{t.contactos["contacts.una.address"]}</span>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+</Layout>

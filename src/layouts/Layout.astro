@@ -1,11 +1,19 @@
 ---
 import MyNavBar from "../components/landing/myNavBar.astro";
 import "../styles/global.css";
-import Footer from "../components/landing/footer.astro";
+import Footer from "../components/landing/Footer.astro";
+import es from "../i18n/es";
+import en from "../i18n/en";
+
+
+ async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
 ---
 
 <!doctype html>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -15,7 +23,7 @@ import Footer from "../components/landing/footer.astro";
 			href="https://cdn-hoverme.netlify.app/hoverme/1.0.4/hoverme.css"
 		/>
 
-		<title>Pineda Leiva y CIA LTDA</title>
+		<title></title>
 	</head>
 	<body>
 		<div class="min-w-sm m-0 font-sans gap-1">
@@ -51,6 +59,20 @@ import Footer from "../components/landing/footer.astro";
 		<script src="../../node_modules/flyonui/flyonui.js"></script>
 	</body>
 </html>
+<script>
+	const select = document.getElementById(
+		"lang-select",
+	) as HTMLSelectElement | null;
+
+	select?.addEventListener("change", ({ target }) => {
+		const selectedLang = (target as HTMLSelectElement).value;
+		const newPath = window.location.pathname.replace(
+			/^\/(es|en)/,
+			`/${selectedLang}`,
+		);
+		window.location.pathname = newPath;
+	});
+</script>
 <style>
 	:root {
 		--default-color: #1e1ee8 !important; /*Esto solo se aplica al hover del navbar. color principal */
